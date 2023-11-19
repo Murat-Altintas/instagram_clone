@@ -3,7 +3,6 @@ import 'dart:async';
 import 'package:bloc/bloc.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:equatable/equatable.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:instagram_clone/extensions.dart';
 
 part 'crud_event.dart';
@@ -41,7 +40,6 @@ class CrudBloc extends Bloc<CrudEvent, CrudState> {
     late Map<String, dynamic> currentUsersData = {};
     final Map<String, dynamic> newUsers = {"mail": event.mail, "pass": event.pass};
 
-    //TODO: çok hızlı "Add User" a basarsam await'ten önce algılayıp tekrar ekliyor. Yani başka bir neden bulamadım. Mümkün mü? :D
     await db.collection("users").get().then((value) {
       for (var element in value.docs) {
         currentUsersData = element.data();
